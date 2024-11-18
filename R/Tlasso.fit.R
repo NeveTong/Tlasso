@@ -11,6 +11,7 @@
 #' if norm.type = 1 and \eqn{\|\Omega\|_{F}=1}{||\Omega||_F =1 } if norm.type = 2. Default value is 2.  
 #' @param thres thresholding value that terminates algorithm before Tth iteration if output change less than \code{thres} after certain iteration, in terms of summation over Frobenius norm. 
 #' If \code{thres} is negative or zero, this algorithm will iterate T times.
+#' @param lambda.min.ratio tuning parameter for huge.
 #' 
 #' @details This function conducts an alternating optimization algorithm to sparse tensor graphical model. The output is optimal consistent even when \code{T=1}, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 #' There are two ternimation criteria, \code{T} and \code{thres}. Algorithm will be terminated if output in certain iteration change less than \code{thres}. Otherwise, T iterations will be fully operated.
