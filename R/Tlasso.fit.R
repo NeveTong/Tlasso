@@ -38,13 +38,13 @@
 #' @export 
 #'
 #' @import rTensor 
-#'          huge
+#'          
 #'          expm
 #'
 #'
 
 
-Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5)  {
+Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5, lambda.min.ratio = 1e-5)  {
   
   if (!is.array(data)){
     stop('argument data should be an array')
@@ -103,9 +103,9 @@ Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5
 
       # optimaze the penalized likelihood with rest K-1 precision fixed fixed
       if(is.null(lambda.vec) == FALSE){
-        Out1 = huge(S.mat, lambda = lambda.vec[k], method = "glasso",verbose = FALSE)
+        Out1 = (S.mat, lambda = lambda.vec[k], method = "glasso", verbose = FALSE, lambda.min.ratio = lambda.min.ratio)
       }else{
-        Out1 = huge(S.mat, method = "glasso",verbose = FALSE)
+        Out1 = (S.mat, method = "glasso", verbose = FALSE, lambda.min.ratio = lambda.min.ratio)
       }
 
       # normalize matrix and stored into Omega.list
