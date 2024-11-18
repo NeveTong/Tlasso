@@ -102,18 +102,21 @@ Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5
 
       S.mat = apply(S.array,c(1,2),mean) * m.vec[k] / prod(m.vec)
 
-      # optimaze the penalized likelihood with rest K-1 precision fixed fixed
+      # optimaze the penalized likelihood with rest K-1 precision fixed
       if(is.null(lambda.vec) == FALSE){
         Out1 = huge(S.mat, lambda = lambda.vec[k], method = "glasso", verbose = FALSE, lambda.min.ratio = lambda.min.ratio)
       }else{
         Out1 = huge(S.mat, method = "glasso", verbose = FALSE, lambda.min.ratio = lambda.min.ratio)
       }
 
+      # find the index of minimum log-likelihood
+      index <- which.min(Out1$loglik)
+
       # normalize matrix and stored into Omega.list
       if(norm.type == 2){
-        Omega.list[[k]] = as.matrix(Out1$icov[[1]]) / norm(as.matrix(Out1$icov[[1]]),type='F')
+        Omega.list[[k]] = as.matrix(Out1$icov[[index]]) / norm(as.matrix(Out1$icov[[index]]),type='F')
       }else if(norm.type == 1){
-        Omega.list[[k]] = as.matrix(Out1$icov[[1]]) / as.matrix(Out1$icov[[1]])[1,1]
+        Omega.list[[k]] = as.matrix(Out1$icov[[index]]) / as.matrix(Out1$icov[[index]])[1,1]
       }
       
       # store the square root of kth precision matrix for likelihood in next update
