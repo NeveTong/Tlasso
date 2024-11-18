@@ -110,7 +110,7 @@ Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5
       }
 
       # find the index of minimum log-likelihood
-      index <- which.min(Out1$loglik)
+      index <- which.max(Out1$loglik)
 
       # normalize matrix and stored into Omega.list
       if(norm.type == 2){
