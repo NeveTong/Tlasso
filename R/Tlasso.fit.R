@@ -62,7 +62,7 @@ Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5
   
   if (!(norm.type==1 | norm.type==2)){
     stop('argument norm.type should be 1 or 2')
-  } else if (!(is.vector(lambda.vec)&(length(lambda.vec)==length(m.vec)))) {
+  } else if ((!(is.vector(lambda.vec)&(length(lambda.vec)==length(m.vec)))) & (!is.null(lambda.vec))) {
     stop('argument lambda.vec should be a vector that matches the dimension of argument data')
   } else if (!( (T==round(T)) & ((T>1)|(T==1) )) ) {
     stop('argument T should be a positive integer')
