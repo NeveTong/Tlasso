@@ -45,7 +45,7 @@
 #'
 
 
-Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5, lambda.min.ratio = 1e-5)  {
+Tlasso.fit <- function(data, T = 1, lambda.vec = NULL, norm.type = 2, thres=1e-5, lambda.min.ratio = 0.1)  {
   
   if (!is.array(data)){
     stop('argument data should be an array')
